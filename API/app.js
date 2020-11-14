@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+// Loading in Mongoose Models
+const { TaskList, Task } = require('./database-backend/mongoose-models');
+
 /* ROUTE HANDLERS */
 
 /* LIST ROUTES */

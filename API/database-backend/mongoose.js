@@ -17,6 +17,4 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
 // Export mongoose object
-module.exports = {
-    mongoose
-};
+module.exports = { mongoose };
