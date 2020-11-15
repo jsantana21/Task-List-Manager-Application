@@ -42,7 +42,7 @@ app.post('/tasklists', (req, res) => {
 
     newTaskList.save().then((tasklistDoc) => {
         // entire task list document is returned w/id
-        res.send(listDoc);
+        res.send(tasklistDoc);
     })
 
 });
@@ -52,7 +52,11 @@ app.post('/tasklists', (req, res) => {
  */
 app.patch('/tasklists/:id', (req, res) => {
     // Update the specified list (list document w/ id in the URL) with new values specified in JSON body of the request
-
+    TaskList.findOneAndUpdate({ _id: req.params.id}, {
+        $set: req.body  
+    }).then(() => {
+        res.send(200);
+    });
 });
 
 /**
