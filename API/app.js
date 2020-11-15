@@ -64,7 +64,11 @@ app.patch('/tasklists/:id', (req, res) => {
  */
 app.delete('/tasklists/:id', (req, res) => {
     // Delete specified list (document w/ id in URL)
-
+    TaskList.findOneAndRemove({
+        _id: req.params.id
+    }).then((removedTaskListDoc) => {
+        res.send(removedTaskListDoc);
+    })
 });
 
 app.listen(3000, () =>{
