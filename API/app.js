@@ -113,6 +113,19 @@ app.patch('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
     });
 });
 
+/**
+ * DELETE /tasklists/:tasklistId/tasks/:taskId (Deletes a task)
+ */
+app.delete('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
+
+    Task.findByIdAndDelete({
+        _id: req.params.taskId,
+        _tasklistId: req.params.tasklistId
+    }).then((removedTaskDoc) => {
+        res.send(removedTaskDoc);
+    })
+});
+
 app.listen(3000, () =>{
     console.log("The server is listening on port 3000");
 });
