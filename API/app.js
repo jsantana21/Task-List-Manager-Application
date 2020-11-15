@@ -75,13 +75,28 @@ app.delete('/tasklists/:id', (req, res) => {
  * GET /tasklists/:tasklistId/tasks (Gets all tasks in a list)
  */
 app.get('/tasklists/:tasklistId/tasks', (req, res) => {
-    // Return all tasks that belong to a  list (specified by listId)
+    // Return all tasks that belong to a  list (specified by tasklistId)
     Task.find({
         _tasklistId: req.params.tasklistId
     }).then((tasks) => {
         res.send(tasks);
     })
 });
+
+/**
+ * POST /lists/:tasklistId/tasks (Create a new task in a list)
+ */
+app.post('/tasklists/:tasklistId/tasks', (req, res) => {
+    // Create a new task in a list specified by tasklistId
+
+    let newTask = new Task({
+        title: req.body.title,
+        _tasklistId: req.params.tasklistId
+    });
+    newTask.save().then((newTaskDoc) =>{
+        res.send(newTaskDoc);
+    })
+})
 
 app.listen(3000, () =>{
     console.log("The server is listening on port 3000");

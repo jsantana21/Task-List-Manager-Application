@@ -7,7 +7,7 @@ const TaskSchema = new mongoose.Schema({
         minlength: 1,
         trim: true
     },
-    _listId: { //know which list this task belongs to
+    _tasklistId: { //know which list this task belongs to
         type: mongoose.Types.ObjectId,
         required: true 
     }
