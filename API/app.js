@@ -20,7 +20,6 @@ app.use(bodyParser.json()); // Passes req body of http request
  * GET /tasklists (all task lists)
  */
 app.get('/tasklists', (req, res)=>{
-    //res.send("Hello World!");
     // Return an array of all the tasklists that belong to the authenticated user 
     TaskList.find({}).then((tasklists) => {
         res.send(tasklists);
