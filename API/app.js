@@ -1,36 +1,56 @@
 const express = require('express');
 const app = express();
 
+const { mongoose } = require('./database-backend/mongoose');
+
+
+const bodyParser = require('body-parser');
+
 // Loading in Mongoose Models
 const { TaskList, Task } = require('./database-backend/mongoose-models');
 
+// Loading in middleware
+app.use(bodyParser.json()); // Passes req body of http request
+
 /* ROUTE HANDLERS */
 
-/* LIST ROUTES */
+/* TASK LIST ROUTES */
 
 /**
- * GET /lists (all lists)
+ * GET /tasklists (all task lists)
  */
-app.get('/lists', (req, res)=>{
+app.get('/tasklists', (req, res)=>{
     //res.send("Hello World!");
-    // Return an array of all the lists that belong to the authenticated user 
-
+    // Return an array of all the tasklists that belong to the authenticated user 
+    TaskList.find({}).then((tasklists) => {
+        res.send(tasklists);
+    });
 
 })
 
 /**
- * POST /lists (creates a list)
+ * POST /tasklists (creates a list)
  */
-app.post('/lists', (req, res) => {
-    // Creates a new list and return new list document back to the user (includes the id)
+app.post('/tasklists', (req, res) => {
+    // Creates a new task list and return new list document back to the user (includes the id)
     // List information (fields) is passed in using JSON request body
+    let title = req.body.title;
+
+    let newTaskList = new TaskList({
+        title
+    });
+
+    newTaskList.save().then((tasklistDoc) => {
+        // entire task list document is returned w/id
+        res.send(listDoc);
+    })
 
 });
 
 /**
  * PATCH: Updates a specified list
  */
-app.patch('/lists/:id', (req, res) => {
+app.patch('/tasklists/:id', (req, res) => {
     // Update the specified list (list document w/ id in the URL) with new values specified in JSON body of the request
 
 });
@@ -38,7 +58,7 @@ app.patch('/lists/:id', (req, res) => {
 /**
  * DELETE: Deletes a list
  */
-app.delete('/lists/:id', (req, res) => {
+app.delete('/tasklists/:id', (req, res) => {
     // Delete specified list (document w/ id in URL)
 
 });
