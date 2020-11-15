@@ -98,6 +98,21 @@ app.post('/tasklists/:tasklistId/tasks', (req, res) => {
     })
 })
 
+/**
+ * PATCH /tasklists/:tasklistId/tasks/:taskId (Update an existing task)
+ */
+app.patch('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
+    // Update an existing task (specified by taskId)
+    Task.findByIdAndUpdate({ 
+        _id: req.params.taskId,
+        _tasklistId: req.body.tasklistId
+    }, {
+        $set: req.body  
+    }).then(() => {
+        res.send(200);
+    });
+});
+
 app.listen(3000, () =>{
     console.log("The server is listening on port 3000");
 });
