@@ -5,5 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
 
-  constructor() { }
+  constructor() {
+    createTaskList(title: string) {
+      // Sends web request to create a task list
+      return this.webReqService.post('lists', { title });
+    }
+   }
 }
