@@ -8,6 +8,8 @@ import { TaskService } from 'src/app/task.service';
 })
 export class NewTaskListComponent implements OnInit {
 
+  tasklist: any; //model for tasklist will be created later on..
+
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
