@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/task.service';
 
@@ -10,7 +10,7 @@ import { TaskService } from 'src/app/task.service';
 })
 export class NewTaskComponent implements OnInit {
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute) { }
+  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) { }
 
   tasklistId: string;
 
@@ -26,7 +26,7 @@ export class NewTaskComponent implements OnInit {
 
   createNewTask(title: string) {
     this.taskService.createNewTask(title, this.tasklistId).subscribe((newTask: Task) =>{
-      console.log(newTask);
+      this.router.navigate(['../'], {relativeTo: this.route}); //Head back to previous page
 
     })
 
