@@ -3,7 +3,6 @@ const app = express();
 
 const { mongoose } = require('./database-backend/mongoose');
 
-
 const bodyParser = require('body-parser');
 
 // Loading in Mongoose Models
