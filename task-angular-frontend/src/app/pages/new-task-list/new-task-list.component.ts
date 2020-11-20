@@ -7,9 +7,7 @@ import { TaskService } from 'src/app/task.service';
   styleUrls: ['./new-task-list.component.scss']
 })
 export class NewTaskListComponent implements OnInit {
-
-  tasklist: any; //model for tasklist will be created later on..
-
+  
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
@@ -21,5 +19,7 @@ export class NewTaskListComponent implements OnInit {
       // Navigates to /task-lists/response._id
     });
   }
+
+
 
 }

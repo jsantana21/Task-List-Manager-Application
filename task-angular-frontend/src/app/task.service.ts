@@ -13,4 +13,8 @@ export class TaskService {
     return this.WebRequestService.post('tasklists', { title });
   }
 
+  getTaskLists() {
+    return this.WebRequestService.get('tasklists');
+  }
+
 }
