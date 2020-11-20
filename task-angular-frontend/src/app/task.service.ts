@@ -17,4 +17,8 @@ export class TaskService {
     return this.WebRequestService.get('tasklists');
   }
 
+  getTasks(tasklistId: string) {
+    return this.WebRequestService.get(`task-lists/${ tasklistId }/tasks`);
+  }
+
 }

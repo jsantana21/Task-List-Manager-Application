@@ -8,7 +8,7 @@
 
             <div class="list-menu">
 
-                <a class="list-menu-item" *ngFor="let tasklist of tasklists">
+                <a class="list-menu-item" *ngFor="let tasklist of tasklists" [routerLink]="['/task-lists', tasklist._id]" routerLinkActive="is-active">
                     <p>{{ tasklist.title }}</p>
                   </a>
 
@@ -23,15 +23,10 @@
                 Tasks
             </h1>
             <!-- Task Elements -->
-            <div class="task complete">
-                <p>Task Element #1</p>
+            <div class="task" *ngFor="let task of tasks">
+                <p>{{ task.title }}</p>
             </div>
-            <div class="task">
-                <p>Task Element #2</p>
-            </div>
-            <div class="task">
-                <p>Task Element #3</p>
-            </div>
+            
         </div>
     </div>
 </div>

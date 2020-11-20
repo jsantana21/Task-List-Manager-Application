@@ -9,19 +9,24 @@ import { TaskService } from 'src/app/task.service';
 })
 export class TaskViewerComponent implements OnInit {
 
-  tasklists: any[]; //model for tasklist will be created later on..
+  tasklists: any[]; //model for tasklists will be created later on...
+  tasks: any[]; //model for tasks will be created later on...
 
-  constructor(private TaskService: TaskService, private route: ActivatedRoute) { }
+  constructor(private taskService: TaskService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
         console.log(params);
+        this.taskService.getTasks(params.tasklistId).subscribe((tasks: any[]) => {
+          this.tasks = tasks;
+        })
+
       }
       )
-      this.TaskService.getTaskLists().subscribe((tasklists: any[]) =>{
+      
+      this.taskService.getTaskLists().subscribe((tasklists: any[]) =>{
         this.tasklists = tasklists;
-
       })
   }
 
