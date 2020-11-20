@@ -24,7 +24,7 @@ export class TaskViewerComponent implements OnInit {
 
       }
       )
-      
+
       this.taskService.getTaskLists().subscribe((tasklists: any[]) =>{
         this.tasklists = tasklists;
       })
