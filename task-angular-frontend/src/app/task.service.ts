@@ -27,9 +27,9 @@ export class TaskService {
     return this.WebRequestService.post(`tasklists/${tasklistId}/tasks`, { title });
   }
 
-  completed(task: Task) {
+  complete(task: Task) {
     return this.WebRequestService.patch(`tasklists/${task._tasklistId}/tasks/${task._id}`, {
-      completed: true
+      completed: true//!task.completed
     });
 
   }

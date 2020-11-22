@@ -33,8 +33,9 @@ export class TaskViewerComponent implements OnInit {
 
   completedTaskClick(task: Task) {
     // Sets task as completed task
-    this.taskService.completed(task).subscribe(() =>{
+    this.taskService.complete(task).subscribe(() =>{
       console.log("Completed successfully");
+      //task.completed = !task.completed;
     })
 
   }
