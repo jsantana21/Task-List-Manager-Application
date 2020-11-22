@@ -10,6 +10,10 @@ const TaskSchema = new mongoose.Schema({
     _tasklistId: { //know which list this task belongs to
         type: mongoose.Types.ObjectId,
         required: true 
+    },
+    completed: {
+        type: Boolean,
+        default: false
     }
 })
 

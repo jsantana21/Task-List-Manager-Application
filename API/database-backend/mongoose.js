@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 // Use JS global promise instead
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/TaskListManagerApp', { useNewUrlParser: true }).then(() => {
+mongoose.connect('mongodb://localhost:27017/TaskListManagerApp', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log("Connected to MongoDB!!!");
 }).catch((e) => {
     console.log("ERROR: Unable to connect to MongoDB");
