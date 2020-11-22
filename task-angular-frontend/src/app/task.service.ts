@@ -29,7 +29,7 @@ export class TaskService {
 
   complete(task: Task) {
     return this.WebRequestService.patch(`tasklists/${task._tasklistId}/tasks/${task._id}`, {
-      completed: true//!task.completed
+      completed: !task.completed
     });
 
   }

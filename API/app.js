@@ -14,12 +14,12 @@ app.use(bodyParser.json()); // Passes req body of http request
 // Sets COR HEADERS on responses
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Methods', 'GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE');
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-        return res.status(200).json({});
-    };
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    //if (req.method === 'OPTIONS') {
+        //res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        //return res.status(200).json({});
+    //};
     next();
 });
 
@@ -113,7 +113,7 @@ app.post('/tasklists/:tasklistId/tasks', (req, res) => {
  */
 app.patch('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
     // Update an existing task (specified by taskId)
-    Task.findOneAndUpdate({ 
+    Task.findByIdAndUpdate({ 
         _id: req.params.taskId,
         _tasklistId: req.body.tasklistId
     }, {
@@ -128,7 +128,7 @@ app.patch('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
  */
 app.delete('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
 
-    Task.findOneAndDelete({
+    Task.findByIdAndDelete({
         _id: req.params.taskId,
         _tasklistId: req.params.tasklistId
     }).then((removedTaskDoc) => {

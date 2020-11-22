@@ -11,8 +11,8 @@ import { TaskService } from 'src/app/task.service';
 })
 export class TaskViewerComponent implements OnInit {
 
-  tasklists: TaskList[]; //model for tasklists will be created later on...
-  tasks: Task[]; //model for tasks will be created later on...
+  tasklists: TaskList[]; 
+  tasks: Task[]; 
 
   constructor(private taskService: TaskService, private route: ActivatedRoute) { }
 
@@ -31,11 +31,11 @@ export class TaskViewerComponent implements OnInit {
       })
   }
 
-  completedTaskClick(task: Task) {
+  onTaskClick(task: Task) {
     // Sets task as completed task
     this.taskService.complete(task).subscribe(() =>{
       console.log("Completed successfully");
-      //task.completed = !task.completed;
+      task.completed = !task.completed; //to allow user to toggle between 'not completed' and 'completed'
     })
 
   }
