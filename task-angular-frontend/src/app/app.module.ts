@@ -8,6 +8,7 @@ import { TaskViewerComponent } from './pages/task-viewer/task-viewer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewTaskListComponent } from './pages/new-task-list/new-task-list.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { NewTaskComponent } from './pages/new-task/new-task.component';
     AppComponent,
     TaskViewerComponent,
     NewTaskListComponent,
-    NewTaskComponent
+    NewTaskComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
