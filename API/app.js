@@ -167,6 +167,35 @@ app.post('/users', (req, res) => {
     })
 })
 
+
+/**
+ * POST /users/login 
+ */
+app.post('/users/login', (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    User.findByCredentials(email, password).then((user) => {
+        return user.createSession().then((refreshToken) => {
+            // Session created successfully = refreshToken returned.
+            // Geneate an access auth token for the user
+
+            return user.generateAccessAuthToken().then((accessToken) => {
+                // access auth token generated successfully, now we return an object containing the auth tokens
+                return { accessToken, refreshToken }
+            });
+        }).then((authTokens) => {
+            // Construct and sends response to the user with their auth tokens in the header and user object in the body
+            res
+                .header('x-refresh-token', authTokens.refreshToken)
+                .header('x-access-token', authTokens.accessToken)
+                .send(user);
+        })
+    }).catch((e) => {
+        res.status(400).send(e);
+    });
+})
+
 app.listen(3000, () =>{
     console.log("The server is listening on port 3000");
 });
