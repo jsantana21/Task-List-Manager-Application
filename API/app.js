@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 // Loading in Mongoose Models
 const { TaskList, Task, User } = require('./database-backend/mongoose-models');
 
+/* MIDDLEWARE BEGINS */
+
 // Loading in middleware
 app.use(bodyParser.json()); // Passes req body of http request
 
@@ -22,6 +24,11 @@ app.use(function (req, res, next) {
     //};
     next();
 });
+
+// Verify Refresh Token Middleware (which will be verifying the session)
+
+
+/* MIDDLEWARE ENDS */
 
 /* ROUTE HANDLERS */
 
