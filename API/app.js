@@ -196,6 +196,18 @@ app.post('/users/login', (req, res) => {
     });
 })
 
+/**
+ * GET /users/me/access-token (Generates and returns access token)
+ */
+app.get('/users/me/access-token', (req, res) => {
+    // user/caller is authenticated and the user_id and user object are available
+    req.userObject.generateAccessAuthToken().then((accessToken) => {
+        res.header('x-access-token', accessToken).send({ accessToken });
+    }).catch((e) => {
+        res.status(400).send(e);
+    });
+})
+
 app.listen(3000, () =>{
     console.log("The server is listening on port 3000");
 });
