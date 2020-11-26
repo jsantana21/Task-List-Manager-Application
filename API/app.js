@@ -6,7 +6,7 @@ const { mongoose } = require('./database-backend/mongoose');
 const bodyParser = require('body-parser');
 
 // Loading in Mongoose Models
-const { TaskList, Task } = require('./database-backend/mongoose-models');
+const { TaskList, Task, User } = require('./database-backend/mongoose-models');
 
 // Loading in middleware
 app.use(bodyParser.json()); // Passes req body of http request
@@ -136,6 +136,38 @@ app.delete('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
     })
 });
 
+/* USER ROUTES */
+
+/**
+ * POST /users (Signs up as a user)
+ */
+app.post('/users', (req, res) => {
+    // User signs up
+    let body = req.body;
+    let newUser = new User(body);
+
+    newUser.save().then(() => {
+        return newUser.createSession();
+    }).then((refreshToken) => {
+        // Session created successfully = refreshToken returned.
+        // Geneates access auth token for user
+
+        return newUser.generateAccessAuthToken().then((accessToken) => {
+            // access auth token generated successfully, now returns object containing auth tokens
+            return { accessToken, refreshToken }
+        });
+    }).then((authTokens) => {
+        // Construct and send the response to the user with their auth tokens in the header and the user object in the body
+        res
+            .header('x-refresh-token', authTokens.refreshToken)
+            .header('x-access-token', authTokens.accessToken)
+            .send(newUser);
+    }).catch((e) => {
+        res.status(400).send(e);
+    })
+})
+
 app.listen(3000, () =>{
     console.log("The server is listening on port 3000");
 });
+
