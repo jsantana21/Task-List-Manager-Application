@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
 });
 
 // Verify Refresh Token Middleware (verifies the session)
-app.use((req, res, next) => {
+let sessionVerification = (req, res, next) => {
     // grabs refresh token from  request header
     let refreshToken = req.header('x-refresh-token');
 
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
         // still have to check if refresh token has expired or not
 
         req.user_id = user._id;
-        //req.userObject = user;
+        req.userObject = user;
         req.refreshToken = refreshToken;
 
         let isSessionValid = false;
@@ -74,7 +74,7 @@ app.use((req, res, next) => {
     }).catch((e) => {
         res.status(401).send(e);
     })
-})
+};
 
 
 
@@ -256,7 +256,7 @@ app.post('/users/login', (req, res) => {
 /**
  * GET /users/me/access-token (Generates and returns access token)
  */
-app.get('/users/me/access-token', (req, res) => {
+app.get('/users/me/access-token', sessionVerification, (req, res) => {
     // user/caller is authenticated and the user_id and user object are available
     req.userObject.generateAccessAuthToken().then((accessToken) => {
         res.header('x-access-token', accessToken).send({ accessToken });
