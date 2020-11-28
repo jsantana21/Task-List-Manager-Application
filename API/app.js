@@ -258,6 +258,8 @@ app.post('/users/login', (req, res) => {
  */
 app.get('/users/me/access-token', sessionVerification, (req, res) => {
     // user/caller is authenticated and the user_id and user object are available
+
+    // Two ways for client to get access token either through request header or req body; just to be sure
     req.userObject.generateAccessAuthToken().then((accessToken) => {
         res.header('x-access-token', accessToken).send({ accessToken });
     }).catch((e) => {
