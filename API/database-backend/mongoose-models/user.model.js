@@ -94,7 +94,7 @@ UserSchema.statics.getJWTSecret = () => {
 }
 
 UserSchema.statics.findByIdAndToken = function (_id, token) {
-    // Used in Auth Middleware (verifySession)
+    // Used in Auth Middleware (sessionVerfication)
 
     const User = this;
 
