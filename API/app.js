@@ -25,7 +25,57 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Verify Refresh Token Middleware (which will be verifying the session)
+// Verify Refresh Token Middleware (verifies the session)
+app.use((req, res, next) => {
+    // grabs refresh token from  request header
+    let refreshToken = req.header('x-refresh-token');
+
+    // grabs _id from request header
+    let _id = req.header('_id');
+
+    User.findByIdAndToken(_id, refreshToken).then((user) => {
+        if (!user) {
+            // user can't be found
+            return Promise.reject({
+                'error': 'User not found. Make sure that the refresh token and user id are correct...'
+            });
+        }
+
+
+        // the user was found so refresh token exists in database 
+        // still have to check if refresh token has expired or not
+
+        req.user_id = user._id;
+        //req.userObject = user;
+        req.refreshToken = refreshToken;
+
+        let isSessionValid = false;
+
+        user.sessions.forEach((session) => {
+            if (session.token === refreshToken) {
+                // check if session has expired
+                if (User.hasRefreshTokenExpired(session.expiresAt) === false) {
+                    // refresh token hasn't expired
+                    isSessionValid = true;
+                }
+            }
+        });
+
+        if (isSessionValid) {
+            // session is valid; call next() to continue with processing web request
+            next();
+        } else {
+            // session isn't valid
+            return Promise.reject({
+                'error': 'Refresh token has expired or session is invalid'
+            })
+        }
+
+    }).catch((e) => {
+        res.status(401).send(e);
+    })
+})
+
 
 
 /* MIDDLEWARE ENDS */
