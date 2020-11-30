@@ -29,6 +29,23 @@ app.use(function (req, res, next) {
     next();
 });
 
+// check if request has a valid JWT access token
+let authenticate = (req, res, next) => {
+    let token = req.header('x-access-token');
+
+    // verify JWT
+    jwt.verify(token, User.getJWTSecret(), (err, decoded) => {
+        if (err) {
+            // ERROR detected; JWT is INVALID = DON'T AUTHENTICATE 
+            res.status(401).send(err);
+        } else {
+            // JWT is VALID
+            req.user_id = decoded._id;
+            next();
+        }
+    });
+}
+
 // Verify Refresh Token Middleware (verifies the session)
 let sessionVerification = (req, res, next) => {
     // grabs refresh token from  request header
