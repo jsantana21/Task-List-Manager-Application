@@ -28,6 +28,23 @@ export class AuthService {
     //this.router.navigate(['/login']);
   }
 
+  // used in web request interceptor
+  getAccessToken() { 
+    return localStorage.getItem('x-access-token');
+  } 
+
+  getRefreshToken() {
+    return localStorage.getItem('x-refresh-token');
+  }
+
+  getUserId() {
+    return localStorage.getItem('user-id');
+  }
+
+  setAccessToken(accessToken: string) {
+    localStorage.setItem('x-access-token', accessToken)
+  }
+
   private setSession(userId: string, accessToken: string, refreshToken: string) { // Helper for Log in method
     localStorage.setItem('user-id', userId);
     localStorage.setItem('x-access-token', accessToken);
