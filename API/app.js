@@ -123,15 +123,16 @@ app.get('/tasklists', authentication, (req, res)=>{
 
 
 /**
- * POST /tasklists (creates a list)
+ * POST /tasklists (creates a tasklist)
  */
-app.post('/tasklists', (req, res) => {
+app.post('/tasklists', authentication, (req, res) => {
     // Creates a new task list and return new list document back to the user (includes the id)
     // List information (fields) is passed in using JSON request body
     let title = req.body.title;
 
     let newTaskList = new TaskList({
-        title
+        title,
+        _userId: req.user_id
     });
 
     newTaskList.save().then((tasklistDoc) => {
