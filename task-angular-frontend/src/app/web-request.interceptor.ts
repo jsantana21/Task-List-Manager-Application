@@ -11,6 +11,10 @@ export class WebRequestInterceptor implements HttpInterceptor {
 
   constructor(private authService: AuthService) { }
 
+  refreshingAccessToken: boolean;
+
+  accessTokenRefreshed: Subject<any> = new Subject();
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     // Handle the request
     request = this.addAuthHeader(request);
