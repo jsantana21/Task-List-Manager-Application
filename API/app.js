@@ -145,9 +145,9 @@ app.post('/tasklists', authentication, (req, res) => {
 /**
  * PATCH: Updates a specified list
  */
-app.patch('/tasklists/:id', (req, res) => {
-    // Update the specified list (list document w/ id in the URL) with new values specified in JSON body of the request
-    TaskList.findOneAndUpdate({ _id: req.params.id}, {
+app.patch('/tasklists/:id', authentication, (req, res) => {
+    // Update the specified list (list document w/ id in the URL) with new values specified in JSON body of request
+    TaskList.findByIdAndUpdate({ _id: req.params.id, _userId: req.user_id}, {
         $set: req.body  
     }).then(() => {
         res.send(200);
