@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 // Loading in Mongoose Models
 const { TaskList, Task, User } = require('./database-backend/mongoose-models');
 
+const jwt = require('jsonwebtoken');
+
 /* MIDDLEWARE BEGINS */
 
 // Loading in middleware
@@ -29,8 +31,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-// check if request has a valid JWT access token
-let authenticate = (req, res, next) => {
+// check if request has valid JWT access token
+let authentication = (req, res, next) => {
     let token = req.header('x-access-token');
 
     // verify JWT
@@ -108,13 +110,17 @@ let sessionVerification = (req, res, next) => {
 /**
  * GET /tasklists (all task lists)
  */
-app.get('/tasklists', (req, res)=>{
-    // Return an array of all the tasklists that belong to the authenticated user 
-    TaskList.find({}).then((tasklists) => {
-        res.send(tasklists);
+app.get('/tasklists', authentication, (req, res)=>{
+    // Return an array of all the tasklists that belong to authenticated user 
+    TaskList.find({
+        _userId: req.user_id
+    }).then((lists) => {
+        res.send(lists);
+    }).catch((e) => {
+        res.send(e);
     });
-
 })
+
 
 /**
  * POST /tasklists (creates a list)
