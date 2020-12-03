@@ -162,8 +162,20 @@ app.delete('/tasklists/:id', (req, res) => {
         _id: req.params.id
     }).then((removedTaskListDoc) => {
         res.send(removedTaskListDoc);
+
+        // delete all tasks that are in deleted list
+        deleteTasksFromList(removedTaskListDoc._id);
     })
 });
+
+// Helper Method for Delete
+let deleteTasksFromList = (_tasklistId) => {
+    Task.deleteMany({
+        _tasklistId
+    }).then(() => {
+        console.log("Tasks from " + _tasklistId + " were deleted!");
+    })
+}
 
 /**
  * GET /tasklists/:tasklistId/tasks (Gets all tasks in a list)
