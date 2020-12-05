@@ -157,10 +157,11 @@ app.patch('/tasklists/:id', authentication, (req, res) => {
 /**
  * DELETE: Deletes a list
  */
-app.delete('/tasklists/:id', (req, res) => {
+app.delete('/tasklists/:id', authentication, (req, res) => {
     // Delete specified list (document w/ id in URL)
-    TaskList.findOneAndRemove({
-        _id: req.params.id
+    TaskList.findByIdAndRemove({
+        _id: req.params.id,
+        _userId: req.user_id
     }).then((removedTaskListDoc) => {
         res.send(removedTaskListDoc);
 
