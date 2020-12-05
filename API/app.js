@@ -230,15 +230,45 @@ app.post('/tasklists/:tasklistId/tasks', authentication, (req, res) => {
  */
 app.patch('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
     // Update an existing task (specified by taskId)
-    Task.findByIdAndUpdate({ 
+
+    TaskList.findOne({
+        _id: req.params.tasklistId,
+        _userId: req.user_id
+    }).then((list) => {
+        if (list) {
+            // if list object with specified conditions is found -> authenticated user can make updates to tasks within list
+            return true;
+        }
+
+        // else -> list object is undefined
+        return false;
+    }).then((canUpdateTasks) => {
+        if (canUpdateTasks) {
+            // authenticated user can update tasks
+            Task.findByIdAndUpdate({
+                _id: req.params.taskId,
+                _listId: req.params.tasklistId
+            }, {
+                    $set: req.body
+                }
+            ).then(() => {
+                res.send({ message: 'Updated successfully.' })
+            })
+        } else {
+            res.sendStatus(404);
+        }
+    })
+    
+});
+
+/*Task.findByIdAndUpdate({ 
         _id: req.params.taskId,
         _tasklistId: req.body.tasklistId
     }, {
         $set: req.body  
     }).then(() => {
         res.send({message: 'Updated successfully'});
-    });
-});
+    });*/
 
 /**
  * DELETE /tasklists/:tasklistId/tasks/:taskId (Deletes a task)
