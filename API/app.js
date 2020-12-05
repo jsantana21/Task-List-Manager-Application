@@ -228,7 +228,7 @@ app.post('/tasklists/:tasklistId/tasks', authentication, (req, res) => {
 /**
  * PATCH /tasklists/:tasklistId/tasks/:taskId (Update an existing task)
  */
-app.patch('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
+app.patch('/tasklists/:tasklistId/tasks/:taskId', authentication, (req, res) => {
     // Update an existing task (specified by taskId)
 
     TaskList.findOne({
