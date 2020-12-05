@@ -261,27 +261,44 @@ app.patch('/tasklists/:tasklistId/tasks/:taskId', authentication, (req, res) => 
     
 });
 
-/*Task.findByIdAndUpdate({ 
-        _id: req.params.taskId,
-        _tasklistId: req.body.tasklistId
-    }, {
-        $set: req.body  
-    }).then(() => {
-        res.send({message: 'Updated successfully'});
-    });*/
-
 /**
  * DELETE /tasklists/:tasklistId/tasks/:taskId (Deletes a task)
  */
-app.delete('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
+app.delete('/tasklists/:tasklistId/tasks/:taskId', authentication, (req, res) => {
+    TaskList.findOne({
+        _id: req.params.tasklistId,
+        _userId: req.user_id
+    }).then((tasklist) => {
+        if (tasklist) {
+            // if list object with specified conditions is found -> authenticated user can delete tasks within list
+            return true;
+        }
 
-    Task.findByIdAndDelete({
+        // else -> list object is undefined
+        return false;
+    }).then((canDeleteTasks) => {
+        if (canDeleteTasks) {
+            Task.findByIdAndRemove({
+                _id: req.params.taskId,
+                _tasklistId: req.params.tasklistId
+            }).then((removedTaskDoc) => {
+                res.send(removedTaskDoc);
+            })
+        } else {
+            res.sendStatus(404);
+        }
+    });
+    
+});
+
+/*
+Task.findByIdAndDelete({
         _id: req.params.taskId,
         _tasklistId: req.params.tasklistId
     }).then((removedTaskDoc) => {
         res.send(removedTaskDoc);
     })
-});
+*/
 
 /* USER ROUTES */
 
