@@ -175,14 +175,14 @@ let deleteTasksFromList = (_tasklistId) => {
     Task.deleteMany({
         _tasklistId
     }).then(() => {
-        console.log("Tasks from " + _tasklistId + " were deleted!");
+        console.log("All tasks from Tasklist ID: " + _tasklistId + " were deleted!");
     })
 }
 
 /**
  * GET /tasklists/:tasklistId/tasks (Gets all tasks in a list)
  */
-app.get('/tasklists/:tasklistId/tasks', (req, res) => {
+app.get('/tasklists/:tasklistId/tasks', authentication, (req, res) => {
     // Return all tasks that belong to a  list (specified by tasklistId)
     Task.find({
         _tasklistId: req.params.tasklistId
@@ -194,17 +194,36 @@ app.get('/tasklists/:tasklistId/tasks', (req, res) => {
 /**
  * POST /lists/:tasklistId/tasks (Create a new task in a list)
  */
-app.post('/tasklists/:tasklistId/tasks', (req, res) => {
+app.post('/tasklists/:tasklistId/tasks', authentication, (req, res) => {
     // Create a new task in a list specified by tasklistId
 
-    let newTask = new Task({
-        title: req.body.title,
-        _tasklistId: req.params.tasklistId
-    });
-    newTask.save().then((newTaskDoc) =>{
-        res.send(newTaskDoc);
+    TaskList.findOne({
+        _id: req.params.tasklistId,
+        _userId: req.user_id
+    }).then((list) => {
+        if (list) {
+            // if list object with specified conditions was found -> authenticated user can create new tasks
+            return true;
+        }
+
+        // else -> list object is undefined
+        return false;
+    }).then((canCreateTask) => {
+        if (canCreateTask) {
+            let newTask = new Task({
+                title: req.body.title,
+                _tasklistId: req.params.tasklistId
+            });
+            newTask.save().then((newTaskDoc) => {
+                res.send(newTaskDoc);
+            })
+        } else {
+            res.sendStatus(404);
+        }
     })
+    
 })
+
 
 /**
  * PATCH /tasklists/:tasklistId/tasks/:taskId (Update an existing task)
