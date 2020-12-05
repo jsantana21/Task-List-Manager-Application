@@ -234,8 +234,8 @@ app.patch('/tasklists/:tasklistId/tasks/:taskId', authentication, (req, res) => 
     TaskList.findOne({
         _id: req.params.tasklistId,
         _userId: req.user_id
-    }).then((list) => {
-        if (list) {
+    }).then((tasklist) => {
+        if (tasklist) {
             // if list object with specified conditions is found -> authenticated user can make updates to tasks within list
             return true;
         }
