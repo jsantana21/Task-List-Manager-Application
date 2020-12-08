@@ -26,20 +26,9 @@ export class WebRequestInterceptor implements HttpInterceptor {
 
         if (error.status === 401) {
           // 401 error to unauthorized
-
+          console.log("test");
           // refresh the access token
-          return this.refreshAccessToken()
-            .pipe(
-              switchMap(() => {
-                request = this.addAuthHeader(request);
-                return next.handle(request);
-              }),
-              catchError((err: any) => {
-                console.log(err);
-                this.authService.logout();
-                return empty();
-              })
-            )
+          this.authService.logout();
         }
 
         return throwError(error);
