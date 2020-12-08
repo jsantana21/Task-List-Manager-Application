@@ -28,9 +28,7 @@ export class WebRequestInterceptor implements HttpInterceptor {
           // 401 error to unauthorized
 
           // refresh the access token
-          this.authService.logout();
-          
-          /*return this.refreshAccessToken()
+          return this.refreshAccessToken()
             .pipe(
               switchMap(() => {
                 request = this.addAuthHeader(request);
@@ -41,7 +39,7 @@ export class WebRequestInterceptor implements HttpInterceptor {
                 this.authService.logout();
                 return empty();
               })
-            )*/
+            )
         }
 
         return throwError(error);
