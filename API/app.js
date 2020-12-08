@@ -12,9 +12,9 @@ const jwt = require('jsonwebtoken');
 
 /* MIDDLEWARE BEGINS */
 
-var cors = require('cors')
+/*var cors = require('cors')
 
-app.use(cors()) // Use this after the variable declaration
+app.use(cors()) // Use this after the variable declaration */
 
 // Loading in middleware
 app.use(bodyParser.json()); // Passes req body of http request
@@ -23,7 +23,7 @@ app.use(bodyParser.json()); // Passes req body of http request
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id');
     //if (req.method === 'OPTIONS') {
         //res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
         //return res.status(200).json({});

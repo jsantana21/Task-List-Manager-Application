@@ -26,9 +26,20 @@ export class WebRequestInterceptor implements HttpInterceptor {
 
         if (error.status === 401) {
           // 401 error to unauthorized
-          console.log("test");
+
           // refresh the access token
-          this.authService.logout();
+          return this.refreshAccessToken()
+            .pipe(
+              switchMap(() => {
+                request = this.addAuthHeader(request);
+                return next.handle(request);
+              }),
+              catchError((err: any) => {
+                console.log(err);
+                this.authService.logout();
+                return empty();
+              })
+            )
         }
 
         return throwError(error);
@@ -40,14 +51,14 @@ export class WebRequestInterceptor implements HttpInterceptor {
     if (this.refreshingAccessToken) {
       return new Observable(observer => {
         this.accessTokenRefreshed.subscribe(() => {
-          // this code will run when the access token has been refreshed
+          // will run when access token is refreshed
           observer.next();
           observer.complete();
         })
       })
     } else {
       this.refreshingAccessToken = true;
-      // we want to call a method in the auth service to send a request to refresh the access token
+      // send request to refresh access token
       return this.authService.getNewAccessToken().pipe(
         tap(() => {
           console.log("Access Token Refreshed!");
