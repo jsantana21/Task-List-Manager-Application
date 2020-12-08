@@ -12,6 +12,10 @@ const jwt = require('jsonwebtoken');
 
 /* MIDDLEWARE BEGINS */
 
+var cors = require('cors')
+
+app.use(cors()) // Use this after the variable declaration
+
 // Loading in middleware
 app.use(bodyParser.json()); // Passes req body of http request
 
