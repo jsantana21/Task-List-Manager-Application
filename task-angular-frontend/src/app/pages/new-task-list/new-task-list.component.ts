@@ -18,8 +18,8 @@ export class NewTaskListComponent implements OnInit {
   createNewTaskList(title: string) {
     this.taskService.createTaskList(title).subscribe((tasklist: TaskList ) => {
       console.log(tasklist);
-      // Navigates to /task-lists/tasklist._id
-      this.router.navigate(['/task-lists', tasklist._id]);
+      // Navigates to /tasklists/tasklist._id
+      this.router.navigate(['/tasklists', tasklist._id]);
     });
   }
 

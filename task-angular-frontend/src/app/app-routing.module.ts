@@ -6,12 +6,12 @@ import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'task-lists', pathMatch: 'full' },
+  {path: '', redirectTo: 'tasklists', pathMatch: 'full' },
   { path: 'new-task-list', component: NewTaskListComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: 'task-lists', component: TaskViewerComponent },
-  { path: 'task-lists/:tasklistId', component: TaskViewerComponent },
-  { path: 'task-lists/:tasklistId/new-task', component: NewTaskComponent }
+  { path: 'tasklists', component: TaskViewerComponent },
+  { path: 'tasklists/:tasklistId', component: TaskViewerComponent },
+  { path: 'tasklists/:tasklistId/new-task', component: NewTaskComponent }
 ];
 
 @NgModule({

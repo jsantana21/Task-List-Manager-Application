@@ -8,7 +8,7 @@
 
             <div class="list-menu">
 
-                <a class="list-menu-item" *ngFor="let tasklist of tasklists" [routerLink]="['/task-lists', tasklist._id]" routerLinkActive="is-active">
+                <a class="list-menu-item" *ngFor="let tasklist of tasklists" [routerLink]="['/tasklists', tasklist._id]" routerLinkActive="is-active">
                     <p>{{ tasklist.title }}</p>
                   </a>
 
