@@ -17,7 +17,7 @@ export class AuthService {
       tap((res: HttpResponse<any>) => {
         // auth tokens are in response header
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-        console.log("LOGGED IN!");
+        console.log("Successfully LOGGED IN!");
       })
     )
   }
@@ -28,7 +28,7 @@ export class AuthService {
       tap((res: HttpResponse<any>) => {
         // auth tokens are in response header
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
-        console.log("Successfully signed up and now logged in!");
+        console.log("Successfully SIGNED UP and LOGGED IN!");
       })
     )
   }

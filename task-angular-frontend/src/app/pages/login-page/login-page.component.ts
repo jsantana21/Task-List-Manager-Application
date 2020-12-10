@@ -28,3 +28,9 @@ export class LoginPageComponent implements OnInit {
 
 
 }
+
+/* USER ACCOUNTS & PASSWORDS TEST CASES:
+test@test.com, helloworld
+test2@test.com, helloworld
+new@test.com, helloworld
+*/
