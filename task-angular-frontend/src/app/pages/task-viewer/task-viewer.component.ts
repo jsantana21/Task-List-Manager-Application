@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TaskList } from 'src/app/models/task-list.model';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/task.service';
@@ -14,12 +14,15 @@ export class TaskViewerComponent implements OnInit {
   tasklists: TaskList[]; 
   tasks: Task[]; 
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute) { }
+  selectedTaskListId: string;
+
+  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
         if (params.tasklistId){
+          this.selectedTaskListId = params.tasklistId;
           this.taskService.getTasks(params.tasklistId).subscribe((tasks: Task[]) => {
             this.tasks = tasks;
           })
@@ -41,6 +44,13 @@ export class TaskViewerComponent implements OnInit {
       task.completed = !task.completed; //to allow user to toggle between 'not completed' and 'completed'
     })
 
+  }
+
+  clickDeleteTaskList() {
+    this.taskService.deleteTaskList(this.selectedTaskListId).subscribe((res: any) => {
+      this.router.navigate(['/tasklists']);
+      console.log(res);
+    })
   }
 
 }
