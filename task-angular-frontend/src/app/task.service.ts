@@ -18,6 +18,11 @@ export class TaskService {
     return this.WebRequestService.post('tasklists', { title });
   }
 
+  updateTaskList(id: string, title: string) {
+    // Sends web request to update task list
+    return this.WebRequestService.patch(`tasklists/${id}`, { title });
+  }
+
   deleteTaskList(id: string) {
     return this.WebRequestService.delete(`tasklists/${id}`);
   }
