@@ -154,7 +154,7 @@ app.patch('/tasklists/:id', authentication, (req, res) => {
     TaskList.findByIdAndUpdate({ _id: req.params.id, _userId: req.user_id}, {
         $set: req.body  
     }).then(() => {
-        res.send(200);
+        res.send({ 'message': 'Updated successfully!!!'});
     });
 });
 

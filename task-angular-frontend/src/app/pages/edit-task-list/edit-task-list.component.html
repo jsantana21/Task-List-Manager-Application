@@ -4,11 +4,11 @@
         Edit task list
       </h1>
   
-      <input #listTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter task list name...">
+      <input #taskListTitleInput class="input has-background-light is-medium" type="text" placeholder="Enter task list name...">
       <br><br>
       <div class="buttons is-right">
         <button class="button is-medium" routerLink="/">Cancel</button>
-        <button class="button is-primary has-text-white is-medium" (click)="clickUpdateTaskList(taskListTitle.value)">Save</button>
+        <button class="button is-primary has-text-white is-medium" (click)="clickUpdateTaskList(taskListTitleInput.value)">Save</button>
       </div>
   
       

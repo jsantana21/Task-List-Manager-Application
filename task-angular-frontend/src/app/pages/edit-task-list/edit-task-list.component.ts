@@ -22,7 +22,7 @@ export class EditTaskListComponent implements OnInit {
     )
   }
 
-  updateTaskList(title: string) {
+  clickUpdateTaskList(title: string) {
     this.taskService.updateTaskList(this.tasklistId, title).subscribe(() => {
       this.router.navigate(['/tasklists', this.tasklistId]);
     })
