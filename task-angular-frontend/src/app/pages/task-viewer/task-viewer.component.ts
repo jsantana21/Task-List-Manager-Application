@@ -53,4 +53,11 @@ export class TaskViewerComponent implements OnInit {
     })
   }
 
+  clickDeleteTask(id: string) {
+    this.taskService.deleteTask(this.selectedTaskListId, id).subscribe((res: any) => {
+      this.tasks = this.tasks.filter(val => val._id !== id); //filter out task from task array
+      console.log(res);
+    })
+  }
+
 }

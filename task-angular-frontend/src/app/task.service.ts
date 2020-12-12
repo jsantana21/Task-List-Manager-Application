@@ -31,6 +31,10 @@ export class TaskService {
     return this.WebRequestService.get(`tasklists/${ tasklistId }/tasks`);
   }
 
+  deleteTask(tasklistId: string, taskId: string) {
+    return this.WebRequestService.delete(`tasklists/${tasklistId}/tasks/${taskId}`);
+  }
+
   createNewTask(title: string, tasklistId: string) {
     // Sends web request to create a task 
     return this.WebRequestService.post(`tasklists/${tasklistId}/tasks`, { title });
