@@ -35,10 +35,10 @@
                         <div class="dropdown-menu" id="dropdown-menu4" role="menu">
                           <div class="dropdown-content">
                             <a [routerLink]="['/edit-task-list', selectedTaskListId]" class="dropdown-item">
-                              Edit
+                              Edit TaskList Title
                             </a>
                             <a (click)="clickDeleteTaskList()" class="dropdown-item has-text-danger">
-                              Delete
+                              Delete TaskList
                             </a>
                           </div>
                         </div>
@@ -51,7 +51,7 @@
                         <p>{{ task.title }}</p>
                     </div>
                     <div class="task-buttons">
-                        <button class="button" [routerLink]="['/tasklists', selectedListId, 'edit-task', task._id]">
+                        <button class="button" [routerLink]="['/tasklists', selectedTaskListId, 'edit-task', task._id]">
                             <div class="icon">
                               <i class="fas fa-edit"></i>
                             </div>
