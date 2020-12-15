@@ -123,8 +123,16 @@
     height: 50px;
     width: 50px;
     bottom: 35px;
-    right: 35px;
+    right: 145px;
     border-radius: 50%; // to make the button a circle
+}
+
+.logout-button {
+    position: absolute;
+    height: 50px;
+    width: 100px;
+    bottom: 35px;
+    right: 35px;
 }
 
 .empty-state-text {

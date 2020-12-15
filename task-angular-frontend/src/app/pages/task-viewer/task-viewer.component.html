@@ -65,18 +65,27 @@
                     </div>
                 </div>
 
-                <h3 class="empty-state-text" *ngIf="tasks.length === 0"> This tasklist has no tasks! Click the add button to create a new task...</h3>
+                <h3 class="empty-state-text" *ngIf="tasks.length === 0"> This tasklist has no tasks! Click the plus button to create a new task...</h3>
 
                 <button routerLink = "./new-task" class="circle-add-button button is-primary">
                     <img src="../../../assets/plus-icon.svg" class="has-text-white">
                 </button>
+
+                <button class="button logout-button is-danger has-text-white" (click)="clickLogOut()" >
+                    Log Out
+                </button>
+
             </div>
 
             <div *ngIf = "!tasks">
                 <h3 class="empty-state-text"> Please select a tasklist from the sidebar</h3>
 
+                <button class="button logout-button is-danger has-text-white" (click)="clickLogOut()" >
+                    Log Out
+                </button>
+
             </div>
-            
         </div>
+        
     </div>
 </div>

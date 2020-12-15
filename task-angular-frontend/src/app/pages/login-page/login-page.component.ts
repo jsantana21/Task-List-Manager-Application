@@ -19,7 +19,7 @@ export class LoginPageComponent implements OnInit {
     this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
         // Logged in successfully
-        //this.router.navigate(['/tasklists']); //Directs user to tasklist page
+        this.router.navigate(['/tasklists']); //Directs user to tasklist page
       }
       console.log(res);
       
