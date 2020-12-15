@@ -16,8 +16,15 @@
 #### Create / Read Operation Feature
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; With the aid of therestful API, the app is able to read in the tasklists and tasks associated with the user's account. The user can then create new tasklists by clicking the "Make a New List" button and new tasks by clicking the "+" button.
 <img src="https://github.com/jsantana21/Task-List-Manager-Application/blob/main/web%20app%20demo%20gifs/Create%20List%20and%20Tasks.gif"  />  
-
-
+#### Edit Operation Feature
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The app also allows the user to edit the tasklist's title by clicking on the cog icon drop down menu and click on "Edit Tasklist's title" option and also edit a task by clicking on the edit icon button that appears when the mouse hovers on the task.
+<img src="https://github.com/jsantana21/Task-List-Manager-Application/blob/main/web%20app%20demo%20gifs/Edit%20List%20and%20Task.gif"  />  
+#### Delete Operation Feature
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The app allows the user to delete a tasklist along with its tasks by clicking on the cog icon drop down menu and click on "Delete Tasklist" option in red and also delete a individual task if needed. The user can also click on a task to cross out the task's title as an indication to show that task has been completed.  
+<img src="https://github.com/jsantana21/Task-List-Manager-Application/blob/main/web%20app%20demo%20gifs/Delete%20List%20and%20Task.gif"  />  
+#### User Authentication Feature
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; By using JSON web token to verify authenciated users, the app's API can respond faster as it doesn't have to query MongoDB and so the user can only view their own tasklists and tasks and not other users. The user also logout out of their account by revoking their access tokens to remove the session.
+<img src="https://github.com/jsantana21/Task-List-Manager-Application/blob/main/web%20app%20demo%20gifs/User%20Auth.gif"  />  
 
 ### What Could be Improved?
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N/A
