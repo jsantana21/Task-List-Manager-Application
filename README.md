@@ -1,6 +1,6 @@
 # Task List Manager Application
 
-### Project Duration: November 11, 2020 - December 18, 2020
+### Project Duration: November 11, 2020 - December 15, 2020
 
 ### Project Task
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The aim of this project is to create a simple task list application using the MEAN tech stack. This project is also meant to demonstrated my understanding of CRUD operation, building an restful API, user authentication and other essential features needed in web app development. 
