@@ -25,6 +25,7 @@
 #### User Authentication Feature
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; By using JSON web token to verify authenciated users, the app's API can respond faster as it doesn't have to query MongoDB and so the user can only view their own tasklists and tasks and not other users. The user also logout out of their account by revoking their access tokens to remove the session.
 <img src="https://github.com/jsantana21/Task-List-Manager-Application/blob/main/web%20app%20demo%20gifs/User%20Auth.gif"  />  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To run this project on your own machine after cloning this repo, type in "ng serve" to run the angular frontend and type in "nodemon app.js" to run the API backend.
 
 ### What Could be Improved?
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; One thing to improve that comes to mind would be when an user edits a tasklist or task that the original title be displayed in the input field but I don't know how to do that at the moment so for the sake of time I'll leave this to be updated later. Another thing would be to fix the data breach that would happen when logging into an account; this can be seen in the last gif. I guess that this is one of the downsides to using JSON web tokens for user authentication and I currently have no solution to this problem unfornately. Overall as simple as this project may seem, having to code the frontend in Angular was difficult for me so for my next major project I plan on using React in the MERN stack to see if it's any easier.   
